@@ -1,0 +1,28 @@
+{
+  "family": "app-service",
+  "networkMode": "awsvpc",
+  "executionRoleArn": "arn:aws:iam::065727387422:role/ecsTaskExecutionRole",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "containerDefinitions": [
+    {
+      "name": "app",
+      "image": "<IMAGE_URI>",
+      "cpu": 0,
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "protocol": "tcp"
+        }
+      ],
+      "environmentFiles": [
+        {
+          "value": "arn:aws:s3:::procurai-stg-cd01/test/nginx/.env",
+          "type": "s3"
+        }
+      ]
+    }
+  ]
+}
